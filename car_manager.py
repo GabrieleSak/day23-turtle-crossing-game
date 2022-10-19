@@ -1,4 +1,3 @@
-import time
 from random import choice, randint
 from turtle import Turtle
 
@@ -10,15 +9,26 @@ MOVE_INCREMENT = 10
 class CarManager(Turtle):
     def __init__(self):
         super().__init__()
+        self.hideturtle()
+        self.cars = []
+        self.speed = STARTING_MOVE_DISTANCE
         self.create_car()
 
     def create_car(self):
-        self.shape("square")
-        self.shapesize(stretch_wid=1, stretch_len=2)
-        self.color(choice(COLORS))
-        self.penup()
-        self.goto(280, randint(-300, 300))
-        self.setheading(180)
+        if randint(1, 2) == 2:
+            new_car = Turtle("square")
+            new_car.speed("slowest")
+            new_car.shapesize(stretch_wid=1, stretch_len=2)
+            new_car.color(choice(COLORS))
+            new_car.penup()
+            new_car.goto(280, randint(-260, 260))
+            new_car.setheading(180)
+            self.cars.append(new_car)
 
     def move(self):
-        self.forward(STARTING_MOVE_DISTANCE)
+        for car in self.cars:
+            car.forward(self.speed)
+
+    def speed_up(self):
+        self.speed += MOVE_INCREMENT
+
