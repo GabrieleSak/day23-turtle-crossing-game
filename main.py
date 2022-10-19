@@ -18,14 +18,12 @@ screen.onkeypress(player.move_up, "Up")
 
 game_is_on = True
 while game_is_on:
-    time.sleep(0.2)
+    time.sleep(0.1)
     screen.update()
-    for _ in range(randint(0, 1)):
-        car_manager.create_car()
+    car_manager.create_car()
     car_manager.move()
 
     if player.ycor() >= 285:
-        print("valio")
         scoreboard.level_up()
         player.reset_position()
         car_manager.speed_up()
